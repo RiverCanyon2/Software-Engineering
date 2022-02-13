@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css'
+import Link from 'next/link';
 
 
 import { useState } from 'react';
@@ -7,249 +8,188 @@ import axios from 'axios';
 
 export default function Home() {
 
-  const [itemName, setItemName] = useState('');
-  const [category, setCategory] = useState('vegetarian');
-  const [description, setDescription] = useState('');
-  const [nutrients, setNutrients] = useState({
-    calories: '',
-    totalFat: '',
-    saturatedFat: '',
-    transFat: '',
-    cholesterol: '',
-    sodium: '',
-    potassium: '',
-    totalCarbohydrate: '',
-    fiber: '',
-    sugar: '',
-    protein: ''
-  })
-  const [costOfGoods, setCostOfGoods] = useState(0);
-  const [costToMarket, setCostToMarket] = useState(0);
+  const [signUp, setSignUp] = useState(false);
+  const [signIn, setSignIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userNotFound, setUserNotFound] = useState(false);
 
-  const submitFormHandler = async event => {
+  const signInHandler = () => {
+    setSignUp(false);
+    setSignIn(true);
+  }
+
+  const signUpHandler = () => {
+    setSignIn(false);
+    setSignUp(true);
+  }
+  const cancelHandler = () => {
+    setSignIn(false);
+    setSignUp(false);
+  }
+
+  const usernameHandler = event => {
+    setUsername(event.target.value);
+  }
+  const passwordHandler = event => {
+    setPassword(event.target.value);
+    setPasswordError(false);
+  }
+  const confirmPasswordHandler = event => {
+    setConfirmPassword(event.target.value);
+    setPasswordError(false);
+  }
+
+  const signUpSubmitHandler = async event => {
     event.preventDefault();
 
-    const response = await axios.post('/api/create-item',{
-      id: Math.random() * 10000,
-      itemName,
-      category,
-      description,
-      nutrients: {
-        calories: nutrients.calories,
-        totalFat: nutrients.totalFat,
-        saturatedFat: nutrients.saturatedFat,
-        transFat: nutrients.transFat,
-        cholesterol: nutrients.cholesterol,
-        sodium: nutrients.sodium,
-        potassium: nutrients.potassium,
-        totalCarbohydrate: nutrients.totalCarbohydrate,
-        fiber: nutrients.fiber,
-        sugar: nutrients.sugar,
-        protein: nutrients.protein
-      },
-      costOfGoods,
-      costToMarket
+    if(password !== confirmPassword) {
+      setPasswordError(true);
+    }else {
+      const response = await axios.post('/api/create-user', {
+        username,
+        password
+      });
+      
+    }
+
+  }
+
+  const signInSubmitHandler = async event => {
+    event.preventDefault();
+
+    const response = await axios.get('/api/validate-user');
+
+    const data = response.data;
+    await data.map((user) => {
+      setUsers((prevUsers) => [...prevUsers, user]);
     });
 
-    console.log(response);
+    users.filter((individual) => {
+      if ((individual.username === username) && (individual.password === password)) {
+        setLoggedIn(true);
+      }
+      else{
+        setUserNotFound(true);
+      }
+    })
   }
 
-  const itemNameHandler = event => {
-    setItemName(event.target.value);
-  }
-  const categoryHandler = event => {
-    setCategory(event.target.value);
-  }
-  const descriptionHandler = event => {
-    setDescription(event.target.value);
-  }
-  const costOfGoodHandler = event => {
-    setCostOfGoods(event.target.value);
-  }
-  const costToMarketHandler = event => {
-    setCostToMarket(event.target.value);
-  }
 
   return (
-    <div className='newItemBackground'>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">Wesley's Farm</a>
-          <div className="container-fluid" id="navbarSupportedContent">
-            <ul className="navbar-nav center justify-content-between">
-            <li className="nav-item">
-              <a className="nav-link">CREATE NEW ITEM</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">HOME</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">VEGETARIANS</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link">CARNIVORES</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link">SWEET TOOTHES</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link">CHECK-OUT</a>
-            </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-    <form className='bg-dark text-white w-50 mx-auto my-3 rounded shadow-lg' onSubmit={submitFormHandler}>
-      <h2 className='h2 mb-4 text-center'>ADD NEW ITEM</h2>
-      <div className='mx-auto my-2 w-75'>
-        <label>Item Name</label>
-        <input 
-          className='shadow form-control' 
-          onChange={itemNameHandler}
-          value={itemName}
-          />
-      </div>
-      <div className='mx-auto my-2 w-75'>
-        <label>Category</label>
-        <select 
-          className="form-select" 
-          aria-label="Default select example" 
-          onChange={categoryHandler}
-          value={category}
-          >
-          <option value='DEFAULT' disabled>Select a Category </option>
-          <option value="Vegetarian" >Vegetarian</option>
-          <option value="Carnivore">Carnivore</option>
-          <option value="Sweet_Tooth">Sweet Tooth</option>
-        </select>
-      </div>
-      <h4 className='h4 text-center'>Nutrients</h4>
-      <div className='mx-auto my-4 w-75'>
-        <div className='row'>
-        <div className='col-lg-4'>
-            <label>Calories</label>
-            <input  
-              className='shadow form-control w-50' 
-              onChange={event => setNutrients({...nutrients, calories: event.target.value})}
-              value={nutrients.calories}
-              />
-          </div>
-          <div className='col-lg-4'>
-              <label>Total Fat</label>
-              <input  
-                className='shadow form-control w-50' 
-                onChange={event => setNutrients({...nutrients, totalFat: event.target.value})}
-                value={nutrients.totalFat}
-                />
-            </div>
-            <div className='col-lg-4'>
-            <label>Saturated Fat</label>
-            <input  
-              className='shadow form-control w-50' 
-              onChange={event => setNutrients({...nutrients, saturatedFat: event.target.value})}
-              value={nutrients.saturatedFat}
-              />
-          </div>
-        </div>
-        <div className='row'>
-          <div className='col-lg-4'>
-              <label>Trans Fat</label>
-              <input  
-                className='shadow form-control w-50' 
-                onChange={event => setNutrients({...nutrients, transFat: event.target.value})}
-                value={nutrients.transFat}
-                />
-            </div>
-            <div className='col-lg-4'>
-              <label>Cholesterol</label>
-              <input  
-                className='shadow form-control w-50' 
-                onChange={event => setNutrients({...nutrients, cholesterol: event.target.value})}
-                value={nutrients.cholesterol}
-                />
-            </div>
-            <div className='col-lg-4'>
-              <label>Sodium</label>
-              <input  
-                className='shadow form-control w-50' 
-                onChange={event => setNutrients({...nutrients, sodium: event.target.value})}
-                value={nutrients.sodium}
-                />
-            </div>
-          </div>
-          <div className='row'>
-            <div className='col-lg-4'>
-              <label>Potassium</label>
-              <input  
-                className='shadow form-control w-50' 
-                onChange={event => setNutrients({...nutrients, potassium: event.target.value})}
-                value={nutrients.potassium}
-                />
-            </div>
-            <div className='col-lg-4'>
-              <label>Total Carbohydrate</label>
-              <input  
-                className='shadow form-control w-50' 
-                onChange={event => setNutrients({...nutrients, totalCarbohydrate: event.target.value})}
-                value={nutrients.totalCarbohydrate}
-                />
-            </div>
-            <div className='col-lg-4'>
-            <label>Fiber</label>
-              <input  
-                className='shadow form-control w-50' 
-                onChange={event => setNutrients({...nutrients, fiber: event.target.value})}
-                value={nutrients.fiber}
-                />
-            </div>
-          </div>
-          <div className='row'>
-            <div className='col-lg-4'>
-              <label>Sugar</label>
-              <input  
-                className='shadow form-control w-50' 
-                onChange={event => setNutrients({...nutrients, sugar: event.target.value})}
-                value={nutrients.sugar}
-                />
-            </div>
-            <div className='col-lg-4'>
-              <label>Protein</label>
-              <input  
-                className='shadow form-control w-50' 
-                onChange={event => setNutrients({...nutrients, protein: event.target.value})}
-                value={nutrients.protein}
-                />
-            </div>
-          </div>
-        </div>
-      <div className='w-75 mx-auto'>
-      <label>Description</label>
-        <input
-              className='shadow form-control' 
-              onChange={descriptionHandler}
-              value={description}
-              />
-      </div>
-        <div className='mx-auto my-2 w-75 '>
-          <label>Cost of Goods</label>
-          <input
-            className='shadow form-control' 
-            onChange={costOfGoodHandler}
-            value={costOfGoods}
-            />
-        </div>
-        <div className='mx-auto my-2 w-75'>
-          <label>Cost to Market</label>
-          <input  
-            className='shadow form-control' 
-            onChange={costToMarketHandler}
-            value={costToMarket}
-            />
-        </div>
-        <div className='d-flex justify-content-center'>
-          <button className='btn btn-success my-5' type='submit'>SUBMIT</button>
+    <div className='newItemBackground w-100'>
+  <div className='text-center my-5'>
+    {!loggedIn && <button type="button" className="btn btn-dark btn-lg my-4 mx-5" onClick={signInHandler}>SIGN IN</button>}
+    {!loggedIn && <button type='button' className='btn btn-dark btn-lg my-4 mx-5' onClick={signUpHandler}>SIGN UP</button>}
+  </div>
+  {(signIn && !loggedIn)  &&
+    <form className='w-50 bg-light mx-auto' onSubmit={signInSubmitHandler}>
+      <h3 className='h3 text-center'>WELCOME BACK</h3>
+      <input
+        className='form-control shadow my-2 w-75 mx-auto'
+        placeholder='Username'
+        value={username}
+        onChange={usernameHandler}
+      />
+      <input
+        className='form-control shadow my-2 w-75 mx-auto'
+        placeholder='Password'
+        value={password}
+        onChange={passwordHandler}
+        type='password'
+        />
+        {userNotFound && <p className='text-danger text-center'>Username or Password Incorrect</p>}
+        <div className='text-center'>
+          <button type='submit' className='btn btn-primary my-2 mx-2'>SIGN IN</button>
+          <button onClick={cancelHandler} className='btn btn-secondary my-2 mx-2'>CANCEL</button> 
         </div>
     </form>
+  }
+  {(signUp && !loggedIn) && 
+    <form className='w-50 bg-light mx-auto' onSubmit={signUpSubmitHandler}>
+      <h3 className='h3 text-center'>WELCOME</h3>
+        <input
+          className='form-control shadow my-2 w-75 mx-auto'
+          placeholder='Username'
+          value={username}
+          onChange={usernameHandler}
+        />
+        <input
+          className='form-control shadow my-2 w-75 mx-auto'
+          placeholder='Password'
+          value={password}
+          onChange={passwordHandler}
+          type='password'
+          />
+          <input
+          className='form-control shadow my-2 w-75 mx-auto'
+          placeholder='Confirm Password'
+          value={confirmPassword}
+          onChange={confirmPasswordHandler}
+          type='password'
+          />
+          {passwordError && <div className='text-center'><p className='text-danger'>Error: Passwords do not match</p></div>}
+          <div className='text-center '>
+            <button type='submit' className='btn btn-primary my-2'>SIGN UP</button>
+            <button onClick={cancelHandler} className='btn btn-secondary my-2 mx-2'>CANCEL</button> 
+          </div>
+    </form>
+  }
+  {loggedIn && 
+    <div className='container'>
+      <div className='card col-12 shadow-lg bg-success'>
+        <div className='card-body'>
+          <h2 className='card-title'>
+            WELCOME TO WESLEYS
+          </h2>
+        </div>
+      </div>
+      <div className='row justify-content-between'>
+      <div className='card col-lg-3 ms-3 shadow-lg bg-dark mt-2'>
+        <div className='card-body'>
+            <img 
+              src='https://images.pexels.com/photos/6896518/pexels-photo-6896518.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+              className='card-img-top round h-75'
+              alt='MEAT'
+            />
+            <h4 className='card-title text-light text-center'>
+              CARNIVORES
+            </h4>
+          </div>
+      </div>
+      <div className='card col-lg-3 shadow-lg mt-2 bg-dark text-light'>
+      <div className='card-body ' >
+            <img 
+              src='https://images.pexels.com/photos/3872373/pexels-photo-3872373.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+              className='card-img-top round h-75'
+              alt='Vegetables'
+            />
+            <h4 className='card-title text-center'>
+              VEGETARIANS
+            </h4>
+          </div>
+      </div>
+      <div className='card col-lg-3 me-3 shadow-lg mt-2 bg-dark text-light'>
+      <div className='card-body'>
+            <img 
+              src='https://images.pexels.com/photos/5996524/pexels-photo-5996524.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+              className='card-img-top round h-75'
+              alt='Sweet Treats'
+              style={{opacity: '.8'}}
+            />
+            <h4 className='card-title text-center'>
+              SWEET TOOTHS
+            </h4>
+          </div>
+      </div>
+      </div>
+      
+    </div>
+  }
     </div>
   )
 }

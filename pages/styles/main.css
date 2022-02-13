@@ -1,12 +1,12 @@
-.newItemBackground {
-    position: relative;
+.create-item-page {
     background-image: url('https://images.pexels.com/photos/2733918/pexels-photo-2733918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
-    background-size: cover;  
-}  
-.newItemBackground::before {
-    content: "";
-    position: absolute;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-color: rgb(0,0,0,0.5);
 }
-  
+.newItemBackground {
+    background-image: url('https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    height: 100vh;
+}
