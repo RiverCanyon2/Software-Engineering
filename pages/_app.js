@@ -5,14 +5,17 @@ import { createContext, useState, useMemo } from 'react';
 export const CheckoutContext = createContext({
   itemsInCart: [],
   setItemsInCart: () => {},
+  total: 0,
+  setTotal: () => {}
 });
 
 
 function MyApp({ Component, pageProps }) {
 
   const [itemsInCart, setItemsInCart] = useState([])
+  const [total, setTotal] = useState(0);
   const value = useMemo(
-    () => ({ itemsInCart, setItemsInCart}),
+    () => ({ itemsInCart, setItemsInCart, total, setTotal}),
     [itemsInCart]
   );
 

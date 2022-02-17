@@ -51,8 +51,26 @@ const CreateNewItem = () => {
       costOfGoods,
       costToMarket
     });
-
-    console.log(response);
+    
+    setItemName('');
+    setCategory('vegetarian');
+    setImageUrl('');
+    setDescription('');
+    setNutrients({
+      calories: '',
+      totalFat: '',
+      saturatedFat: '',
+      transFat: '',
+      cholesterol: '',
+      sodium: '',
+      potassium: '',
+      totalCarbohydrate: '',
+      fiber: '',
+      sugar: '',
+      protein: ''
+    });
+    setCostOfGoods(0);
+    setCostToMarket(0);
   }
 
   const itemNameHandler = event => {
