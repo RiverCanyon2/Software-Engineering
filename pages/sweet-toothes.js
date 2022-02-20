@@ -70,7 +70,8 @@ const SweetTooths = () => {
                                             name: sweet.itemName,
                                             quantity: 1,
                                             cost: parseInt(sweet.costToMarket),
-                                            image: sweet.imageUrl
+                                            image: sweet.imageUrl,
+                                            stripeApiID: sweet.stripeApiID
                                         }]); 
                                         console.log(itemsInCart)
                                         }
@@ -109,7 +110,8 @@ const SweetTooths = () => {
                                                     name: sweet.itemName,
                                                     quantity: 1,
                                                     cost: parseInt(sweet.costToMarket),
-                                                    image: sweet.imageUrl
+                                                    image: sweet.imageUrl,
+                                                    stripeApiID: sweet.stripeApiID
                                                 }]);
                                             }
                                         })
@@ -118,7 +120,8 @@ const SweetTooths = () => {
                                                     name: sweet.itemName,
                                                     quantity: 1,
                                                     cost: parseInt(sweet.costToMarket),
-                                                    image: sweet.imageUrl
+                                                    image: sweet.imageUrl,
+                                                    stripeApiID: sweet.stripeApiID
                                                 }]); 
                                                 
                                     }

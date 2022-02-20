@@ -1,11 +1,48 @@
-import { useState, useEffect, useContext} from 'react';
+import { useContext, useEffect } from 'react';
 import { CheckoutContext } from './_app';
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+
 import 'bootstrap/dist/css/bootstrap.css'
 
 
 const Checkout = () => {
 
-    const { itemsInCart, setItemsInCart, total, setTotal } = useContext(CheckoutContext);
+    useEffect(() => {
+        const query = new URLSearchParams(window.location.search);
+        if(query.get('success')) {
+            console.log('WHOOP')
+        }
+        if(query.get('cancel')){
+            console.log("BLAH")
+        }
+    },[])
+
+    const { itemsInCart, total } = useContext(CheckoutContext);
+
+    const checkoutSubmitHandler = async (event) => {
+        event.preventDefault();
+
+        const line_items = itemsInCart.map((item) => {
+                return ({
+                    price: item.stripeApiID,
+                    quantity: item.quantity
+                })
+            })
+        await loadStripe(
+            process.env.API_PUBLIC_KEY
+        );
+        const response = axios.post('/api/checkout_sessions', {
+            line_items
+        }, {
+            headers: {
+                "Content-Type": 'application/json',
+        }
+    })
+        
+        const body = await response;
+        window.location.href = body.data.url;
+    }
 
 
     return(
@@ -30,7 +67,12 @@ const Checkout = () => {
                 </div>
             </div>
             <div className='text-center my-3 '>
-                <button className='button btn-primary rounded-3 btn-lg btn-block shadow-lg' type='button'>CHECKOUT</button> 
+            <form onSubmit={checkoutSubmitHandler}>
+                <button 
+                    className='button btn-primary rounded-3 btn-lg btn-block shadow-lg' 
+                    type='submit'
+                    >CHECKOUT</button>
+            </form> 
             </div>
             
         </>

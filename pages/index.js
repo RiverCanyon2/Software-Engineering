@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import Link from 'next/link';
-
-
 import { useState, useContext } from 'react';
 import { CheckoutContext } from './_app';
 import axios from 'axios';
+import Stripe from 'stripe';
+import { GetServerSideProps} from 'next';
 
 
 export default function Home() {

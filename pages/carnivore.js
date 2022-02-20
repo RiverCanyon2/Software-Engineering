@@ -61,7 +61,8 @@ const Carnivores = () => {
                                             name: meat.itemName,
                                             quantity: 1,
                                             cost: parseInt(meat.costToMarket),
-                                            image: meat.imageUrl
+                                            image: meat.imageUrl,
+                                            stripeApiID: sweet.stripeApiID
                                         }]); 
                                         console.log(itemsInCart)
                                         }
@@ -100,7 +101,8 @@ const Carnivores = () => {
                                                     name: meat.itemName,
                                                     quantity: 1,
                                                     cost: parseInt(meat.costToMarket),
-                                                    image: meat.imageUrl
+                                                    image: meat.imageUrl,
+                                                    stripeApiID: sweet.stripeApiID
                                                 }]);
                                             }
                                         })
@@ -109,7 +111,8 @@ const Carnivores = () => {
                                                     name: meat.itemName,
                                                     quantity: 1,
                                                     cost: parseInt(meat.costToMarket),
-                                                    image: meat.imageUrl
+                                                    image: meat.imageUrl,
+                                                    stripeApiID: sweet.stripeApiID
                                                 }]); 
                                                 
                                     }

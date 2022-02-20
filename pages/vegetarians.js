@@ -62,7 +62,8 @@ const Vegetarians = () => {
                                             name: vegetable.itemName,
                                             quantity: 1,
                                             cost: parseInt(vegetable.costToMarket),
-                                            image: vegetable.imageUrl
+                                            image: vegetable.imageUrl,
+                                            stripeApiID: sweet.stripeApiID
                                         }]); 
                                         console.log(itemsInCart)
                                         }
@@ -101,7 +102,8 @@ const Vegetarians = () => {
                                                     name: vegetable.itemName,
                                                     quantity: 1,
                                                     cost: parseInt(vegetable.costToMarket),
-                                                    image: vegetable.imageUrl
+                                                    image: vegetable.imageUrl,
+                                                    stripeApiID: sweet.stripeApiID
                                                 }]);
                                             }
                                         })
@@ -110,7 +112,8 @@ const Vegetarians = () => {
                                                     name: vegetable.itemName,
                                                     quantity: 1,
                                                     cost: parseInt(vegetable.costToMarket),
-                                                    image: vegetable.imageUrl
+                                                    image: vegetable.imageUrl,
+                                                    stripeApiID: sweet.stripeApiID
                                                 }]); 
                                                 
                                     }

@@ -25,6 +25,7 @@ const CreateNewItem = () => {
   })
   const [costOfGoods, setCostOfGoods] = useState(0);
   const [costToMarket, setCostToMarket] = useState(0);
+  const [stripeApiID, setStripeApiID] = useState('');
 
   const submitFormHandler = async event => {
     event.preventDefault();
@@ -49,7 +50,8 @@ const CreateNewItem = () => {
         protein: nutrients.protein
       },
       costOfGoods,
-      costToMarket
+      costToMarket,
+      stripeApiID
     });
     
     setItemName('');
@@ -71,6 +73,7 @@ const CreateNewItem = () => {
     });
     setCostOfGoods(0);
     setCostToMarket(0);
+    setStripeApiID('');
   }
 
   const itemNameHandler = event => {
@@ -91,7 +94,9 @@ const CreateNewItem = () => {
   const costToMarketHandler = event => {
     setCostToMarket(event.target.value);
   }
-
+  const stripeIdHandler = event => {
+    setStripeApiID(event.target.value);
+  }
   
 
     return (
@@ -105,6 +110,16 @@ const CreateNewItem = () => {
           className='shadow form-control' 
           onChange={itemNameHandler}
           value={itemName}
+          />
+      </div>
+      <div className='mx-auto my-2 w-75'>
+        <label>Stripe API ID</label>
+        <input 
+          className='shadow form-control' 
+          onChange={stripeIdHandler}
+          value={stripeApiID}
+          required
+          placeholder='*Required'
           />
       </div>
       <div className='mx-auto my-2 w-75'>
