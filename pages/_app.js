@@ -6,7 +6,11 @@ export const CheckoutContext = createContext({
   itemsInCart: [],
   setItemsInCart: () => {},
   total: 0,
-  setTotal: () => {}
+  setTotal: () => {},
+  loggedIn: false,
+  setLoggedIn: () => {},
+  isAdmin: false,
+  setIsAdmin: () => {}
 });
 
 
@@ -14,9 +18,11 @@ function MyApp({ Component, pageProps }) {
 
   const [itemsInCart, setItemsInCart] = useState([])
   const [total, setTotal] = useState(0);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin ] = useState(false);
   const value = useMemo(
-    () => ({ itemsInCart, setItemsInCart, total, setTotal}),
-    [itemsInCart]
+    () => ({ itemsInCart, setItemsInCart, total, setTotal, loggedIn, setLoggedIn, isAdmin, setIsAdmin}),
+    [itemsInCart, loggedIn, isAdmin]
   );
 
   return (

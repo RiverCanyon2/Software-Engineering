@@ -2,11 +2,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Link from 'next/link';
 
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { CheckoutContext } from './_app';
 import axios from 'axios';
 
 
 export default function Home() {
+  const { loggedIn, setLoggedIn, isAdmin, setIsAdmin } = useContext(CheckoutContext);
 
   const [signUp, setSignUp] = useState(false);
   const [signIn, setSignIn] = useState(false);
@@ -15,7 +17,6 @@ export default function Home() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [users, setUsers] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
   const [userNotFound, setUserNotFound] = useState(false);
 
   const signInHandler = () => {
@@ -56,7 +57,10 @@ export default function Home() {
       });
       
     }
-
+    setPassword('');
+    setUsername('');
+    setConfirmPassword('');
+    setLoggedIn(true);
   }
 
   const signInSubmitHandler = async event => {
@@ -71,6 +75,9 @@ export default function Home() {
 
     users.filter((individual) => {
       if ((individual.username === username) && (individual.password === password)) {
+        if((individual.username === "WINNERS") && (individual.password === "Password1234")) {
+          setIsAdmin(true);
+        }
         setLoggedIn(true);
       }
       else{
@@ -141,7 +148,7 @@ export default function Home() {
   }
   {loggedIn && 
     <div className='container'>
-      <div className='card col-12 shadow-lg bg-success'>
+      <div className='card col-12 shadow-lg' style={{background: "linear-gradient(to right, #5cb85c, black)", color: 'white'}}>
         <div className='card-body'>
           <h2 className='card-title'>
             WELCOME TO WESLEYS
@@ -150,6 +157,7 @@ export default function Home() {
       </div>
       <div className='row justify-content-between'>
       <div className='card col-lg-3 ms-3 shadow-lg bg-dark mt-2'>
+      <Link href='/carnivore'>
         <div className='card-body'>
             <img 
               src='https://images.pexels.com/photos/6896518/pexels-photo-6896518.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
@@ -159,10 +167,17 @@ export default function Home() {
             <h4 className='card-title text-light text-center'>
               CARNIVORES
             </h4>
+            <div className='text-center'>
+            <button type='button' className='btn rounded' style={{background: "linear-gradient(to right, #5cb85c, black)", color: 'white'}}>
+              CHOW TIME
+            </button>
+            </div>
           </div>
+          </Link>
       </div>
-      <div className='card col-lg-3 shadow-lg mt-2 bg-dark text-light'>
-      <div className='card-body ' >
+      <div className='card col-lg-3 shadow-lg mt-2 bg-dark text-light '>
+      <Link href='/vegetarians'>
+      <div className='card-body' >
             <img 
               src='https://images.pexels.com/photos/3872373/pexels-photo-3872373.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
               className='card-img-top round h-75'
@@ -171,20 +186,33 @@ export default function Home() {
             <h4 className='card-title text-center'>
               VEGETARIANS
             </h4>
+            <div className='text-center'>
+            <button type='button' className='btn rounded' style={{background: "linear-gradient(to right, #5cb85c, black)", color: 'white'}}>
+              CHOW TIME
+            </button>
+            </div>
           </div>
+          </Link>
       </div>
       <div className='card col-lg-3 me-3 shadow-lg mt-2 bg-dark text-light'>
-      <div className='card-body'>
+      <Link href='/sweet-toothes'>
+      <div className='card-body '>
             <img 
               src='https://images.pexels.com/photos/5996524/pexels-photo-5996524.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-              className='card-img-top round h-75'
+              className='card-img-top rounded-lg h-75'
               alt='Sweet Treats'
               style={{opacity: '.8'}}
             />
             <h4 className='card-title text-center'>
               SWEET TOOTHS
             </h4>
+            <div className='text-center'>
+            <button type='button' className='btn rounded' style={{background: "linear-gradient(to right, #5cb85c, black)", color: 'white'}}>
+              CHOW TIME
+            </button>
+            </div>
           </div>
+        </Link>
       </div>
       </div>
       
