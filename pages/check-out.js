@@ -30,7 +30,7 @@ const Checkout = () => {
                 })
             })
         await loadStripe(
-            process.env.API_PUBLIC_KEY
+            "pk_test_51KUacTD22xwXIH9AMgudKoGOvsZzj7T8ae4bePuoTVtt3s40QWCkE3wpAP1GOTkM1srYssEdvnsRM0m4Oo0Wz6Yl00GLVzDl6d"
         );
         const response = axios.post('/api/checkout_sessions', {
             line_items

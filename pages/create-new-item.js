@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css'
-
+import Link from 'next/link';
 
 import { useState } from 'react';
 import axios from 'axios';
@@ -26,6 +26,8 @@ const CreateNewItem = () => {
   const [costOfGoods, setCostOfGoods] = useState(0);
   const [costToMarket, setCostToMarket] = useState(0);
   const [stripeApiID, setStripeApiID] = useState('');
+
+  const [createNewItem, setCreateNewItem] = useState(false)
 
   const submitFormHandler = async event => {
     event.preventDefault();
@@ -97,11 +99,23 @@ const CreateNewItem = () => {
   const stripeIdHandler = event => {
     setStripeApiID(event.target.value);
   }
+
+  const createItemHandler = () => {
+    setCreateNewItem(true);
+  }
   
 
     return (
       <div className='create-item-page'>
-      <div className='pt-3'>
+      <div className='text-center mt-4'>
+        <button className='btn btn-primary mx-2' onClick={createItemHandler}>CREATE NEW ITEM</button>
+        <Link href='/customer-transactions' >
+        <button className='btn btn-secondary mx-2 text-white' style={{color: 'white', textDecoration: 'none'}} >
+          VIEW Transaction Data
+        </button>
+        </Link>
+      </div>
+      {createNewItem && <div className='pt-3'>
       <form className='bg-dark text-white w-50 mx-auto rounded shadow-lg' onSubmit={submitFormHandler}>
       <h2 className='h2 mb-4 text-center'>ADD NEW ITEM</h2>
       <div className='mx-auto my-2 w-75'>
@@ -271,7 +285,7 @@ const CreateNewItem = () => {
           <button className='btn btn-success my-5' type='submit'>SUBMIT</button>
         </div>
     </form>
-    </div>
+    </div>}
     </div>
     )
 }
