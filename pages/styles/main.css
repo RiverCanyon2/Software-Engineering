@@ -1,13 +1,5 @@
-.create-item-page {
-    background-image: url('https://images.pexels.com/photos/2733918/pexels-photo-2733918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
-    height: 100vh;
-    width: 100vw;
-    background-repeat: no-repeat;
-}
-.newItemBackground {
-    background-image: url('https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
-    background-size: cover;
-    background-repeat: no-repeat;
-    overflow-y: hidden;
-    height: 100vh;
+.backgroundColor {
+  background-image: linear-gradient(to right, #4568dc, #b06ab3);
+  width: 100vw;
+  height: 100vh;
 }

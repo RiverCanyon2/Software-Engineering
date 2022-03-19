@@ -107,17 +107,17 @@ const CreateNewItem = () => {
 
     return (
       <div className='create-item-page'>
-      <div className='text-center mt-4'>
+      <div className='text-center pt-4'>
         <button className='btn btn-primary mx-2' onClick={createItemHandler}>CREATE NEW ITEM</button>
         <Link href='/customer-transactions' >
         <button className='btn btn-secondary mx-2 text-white' style={{color: 'white', textDecoration: 'none'}} >
-          VIEW Transaction Data
+          VIEW TRANSACTION DATA
         </button>
         </Link>
       </div>
       {createNewItem && <div className='pt-3'>
       <form className='bg-dark text-white w-50 mx-auto rounded shadow-lg' onSubmit={submitFormHandler}>
-      <h2 className='h2 mb-4 text-center'>ADD NEW ITEM</h2>
+      <h2 className='h2 pb-4 text-center'>ADD NEW ITEM</h2>
       <div className='mx-auto my-2 w-75'>
         <label>Item Name</label>
         <input 

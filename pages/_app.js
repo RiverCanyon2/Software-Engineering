@@ -28,7 +28,9 @@ function MyApp({ Component, pageProps }) {
   return (
   <CheckoutContext.Provider value={value}>
     <Navbar />
+    <div className="backgroundColor">
     <Component {...pageProps} />
+    </div>
   </CheckoutContext.Provider>
    )
 }

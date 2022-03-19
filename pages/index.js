@@ -86,7 +86,7 @@ export default function Home() {
 
   return (
     <div className='newItemBackground w-100'>
-  <div className='text-center my-5'>
+  <div className='text-center py-5'>
     {!loggedIn && <button type="button" className="btn btn-dark btn-lg my-4 mx-5" onClick={signInHandler}>SIGN IN</button>}
     {!loggedIn && <button type='button' className='btn btn-dark btn-lg my-4 mx-5' onClick={signUpHandler}>SIGN UP</button>}
   </div>
@@ -145,7 +145,7 @@ export default function Home() {
   }
   {loggedIn && 
     <div className='container'>
-      <div className='card col-12 shadow-lg' style={{background: "linear-gradient(to right, #5cb85c, black)", color: 'white'}}>
+      <div className='card col-12 shadow-lg' style={{background: "#5D3FD3", color: 'white', boxShadow: '0 0 15px black'}}>
         <div className='card-body'>
           <h2 className='card-title'>
             WELCOME TO WESLEYS
@@ -165,7 +165,7 @@ export default function Home() {
               CARNIVORES
             </h4>
             <div className='text-center'>
-            <button type='button' className='btn rounded' style={{background: "linear-gradient(to right, #5cb85c, black)", color: 'white'}}>
+            <button type='button' className='btn rounded' style={{background: "#7F00FF", color: 'white'}}>
               CHOW TIME
             </button>
             </div>
@@ -184,7 +184,7 @@ export default function Home() {
               VEGETARIANS
             </h4>
             <div className='text-center'>
-            <button type='button' className='btn rounded' style={{background: "linear-gradient(to right, #5cb85c, black)", color: 'white'}}>
+            <button type='button' className='btn rounded' style={{background: "#7F00FF", color: 'white'}}>
               CHOW TIME
             </button>
             </div>
@@ -204,7 +204,7 @@ export default function Home() {
               SWEET TOOTHS
             </h4>
             <div className='text-center'>
-            <button type='button' className='btn rounded' style={{background: "linear-gradient(to right, #5cb85c, black)", color: 'white'}}>
+            <button type='button' className='btn rounded' style={{background: "#7F00FF", color: 'white'}}>
               CHOW TIME
             </button>
             </div>
