@@ -55,6 +55,8 @@ const CreateNewItem = () => {
       costToMarket,
       stripeApiID
     });
+
+    
     
     setItemName('');
     setCategory('vegetarian');
