@@ -2,6 +2,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css'
 import Script from 'next/script';
 
+
 import { useEffect, useState, useContext  } from 'react';
 import { CheckoutContext } from './_app';
 
@@ -44,11 +45,11 @@ const SweetTooths = () => {
             </div>}
         <div className='container d-flex'>
             {sweets.map((sweet) =>
-                <div className='row w-100'>
-                <div className='card col-4 shadow-lg px-0' key={Math.random * 10000}>
+                <div className='row w-50'>
+                <div className='card col-4 shadow-lg px-0' key={Math.random * 10000} style={{width: "25%"}}>
                     <img className='card-img-top image-fluid h-50 w-100' src={sweet.imageUrl} />
-                    <div className='card-body h-50 pb-0' >
-                        <h5 className='h5 card-text text-center'>{sweet.itemName}</h5>
+                    <div className='card-body' style={{height:1}}>
+                        <h5 className='card-text text-center'>{sweet.itemName}</h5>
                         <p className='card-text text-center'>${sweet.costToMarket}.00</p>
                         <div className='card-link d-flex justify-content-between'>
                             <button className='btn btn-dark btn-sm  pb-0 mb-0'

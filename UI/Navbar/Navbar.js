@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="container-fluid">
           <a className="navbar-brand" href="#">Wesley's Farm</a>
           <div className="container-fluid" id="navbarSupportedContent">
-            <ul className="navbar-nav center justify-content-between">
+            <ul className="navbar-nav center justify-content-between " style={{position:'sticky'}}>
           {isAdmin &&  <li className="nav-item">
             <Link href='/create-new-item'>
               <a className="nav-link">ADMIN PANEL</a>
