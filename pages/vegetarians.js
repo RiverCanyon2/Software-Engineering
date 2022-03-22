@@ -1,7 +1,10 @@
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css'
+import Script from 'next/script'
 
-import { useEffect, useState } from 'react';
+
+import { useEffect, useState, useContext } from 'react';
+import { CheckoutContext } from './_app';
 
 
 const Vegetarians = () => {
@@ -18,10 +21,10 @@ const Vegetarians = () => {
 
         const response = await axios.get('/api/get-vegetarian-items');
         const data = response.data;
+        console.log(data)
 
         data.map((vegetable) => {
             setVegetables((prevVeggies) => [...prevVeggies, vegetable]);
-            console.log(vegetable.category);
         });
         setLoading(false);
     }
@@ -37,7 +40,7 @@ const Vegetarians = () => {
         <div className='container d-flex'>
             {vegetables.map((vegetable) =>
                 <div className='row w-100'>
-                <div className='card col-4 shadow-lg px-0' key={Math.random * 10000}>
+                <div className='card col-4 shadow-lg px-0' key={Math.random * 10000} style={{width: "25%"}}>
                     <img className='card-img-top image-fluid h-50 w-100' src={vegetable.imageUrl} />
                     <div className='card-body h-50 pb-0' >
                         <h5 className='h5 card-text text-center'>{vegetable.itemName}</h5>
@@ -55,7 +58,6 @@ const Vegetarians = () => {
                                             }
                                         })
                                     }
-                                    console.log(exists)
                                     
                                     if (exists === false) {
                                         setItemsInCart((prev) => [...prev, {
@@ -65,7 +67,6 @@ const Vegetarians = () => {
                                             image: vegetable.imageUrl,
                                             stripeApiID: sweet.stripeApiID
                                         }]); 
-                                        console.log(itemsInCart)
                                         }
                                         else {
                                             const newArray = itemsInCart.map((cartItem) => {
@@ -134,3 +135,4 @@ const Vegetarians = () => {
 }
 
 export default Vegetarians;
+//

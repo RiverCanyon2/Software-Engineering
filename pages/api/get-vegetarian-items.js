@@ -9,7 +9,7 @@ const collection = db.collection('items');
 export default async function handler(req,res) {
     if(req.method === 'GET') {
         await client.connect();
-        const response = await collection.find({category: 'Vegetarian'}).toArray();
+        const response = await collection.find({category: 'vegetarian'}).toArray();
     
         res.status(200).send(response);
         client.close();
