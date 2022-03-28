@@ -5,7 +5,11 @@ import { useContext } from 'react';
 import { CheckoutContext } from './../../pages/_app'
 
 const Navbar = () => {
-  const { loggedIn, isAdmin} = useContext(CheckoutContext);
+  const { loggedIn, isAdmin, setLoggedIn} = useContext(CheckoutContext);
+
+  const onLogoutHandler = () => {
+    setLoggedIn(false)
+  }
 
     return(
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
@@ -44,6 +48,9 @@ const Navbar = () => {
             <Link href='/check-out'>
               <a className="nav-link">CHECK-OUT</a>
             </Link>
+            </li>}
+            {loggedIn && <li className='nav-item' onClick={onLogoutHandler}>
+              <Link href='/logout'><a className='nav-link' type='button'>LOG OUT</a></Link>
             </li>}
         </ul>
       </div>

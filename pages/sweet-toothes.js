@@ -64,7 +64,6 @@ const SweetTooths = () => {
                                             }
                                         })
                                     }
-                                    console.log(exists)
                                     
                                     if (exists === false) {
                                         setItemsInCart((prev) => [...prev, {
@@ -74,7 +73,6 @@ const SweetTooths = () => {
                                             image: sweet.imageUrl,
                                             stripeApiID: sweet.stripeApiID
                                         }]); 
-                                        console.log(itemsInCart)
                                         }
                                         else {
                                             const newArray = itemsInCart.map((cartItem) => {
@@ -143,3 +141,5 @@ const SweetTooths = () => {
 }
 
 export default SweetTooths;
+
+//

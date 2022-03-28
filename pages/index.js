@@ -86,7 +86,7 @@ export default function Home() {
 
   return (
     <div className='newItemBackground w-100'>
-  <div className='text-center py-5'>
+  <div className='text-center py-3'>
     {!loggedIn && <button type="button" className="btn btn-dark btn-lg my-4 mx-5" onClick={signInHandler}>SIGN IN</button>}
     {!loggedIn && <button type='button' className='btn btn-dark btn-lg my-4 mx-5' onClick={signUpHandler}>SIGN UP</button>}
   </div>
