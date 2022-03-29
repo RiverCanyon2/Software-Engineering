@@ -35,7 +35,7 @@ const SweetTooths = () => {
     
 
     return(
-        <div className='container'>
+        <div className='container' style={{marginTop:-50}}>
         <Script src='https://kit.fontawesome.com/9b62c297be.js' strategy='beforeInteractive' />
         <h1 className='h1 my-5 text-center'>SWEET TREATS</h1>
         {loading && 
@@ -45,12 +45,12 @@ const SweetTooths = () => {
             </div>}
         <div className='container d-flex'>
             {sweets.map((sweet) =>
-                <div className='row w-50'>
-                <div className='card col-4 shadow-lg px-0' key={Math.random * 10000} style={{width: "25%"}}>
-                    <img className='card-img-top image-fluid h-50 w-100' src={sweet.imageUrl} />
-                    <div className='card-body' style={{height:1}}>
+                <div className='' style={{display: 'flex', flexDirection: 'row', marginRight:8, boxShadow: "5px 5px 5px black"}}>
+                <div className='card shadow-lg px-0' key={Math.random * 10000} style={{flex: 1}}>
+                    <img className='card-img-top image-fluid h-100 w-100' src={sweet.imageUrl} />
+                    <div className='card-body' style={{height:"100%",}}>
                         <h5 className='card-text text-center'>{sweet.itemName}</h5>
-                        <p className='card-text text-center'>${sweet.costToMarket}.00</p>
+                        <p className='card-text text-center'>${sweet.costToMarket}</p>
                         <div className='card-link d-flex justify-content-between'>
                             <button className='btn btn-dark btn-sm  pb-0 mb-0'
                             onClick={() => {

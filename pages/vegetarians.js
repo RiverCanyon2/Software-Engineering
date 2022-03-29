@@ -1,13 +1,15 @@
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css'
-import Script from 'next/script'
+import Script from 'next/script';
 
 
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext  } from 'react';
 import { CheckoutContext } from './_app';
 
 
 const Vegetarians = () => {
+    const { itemsInCart, setItemsInCart, total, setTotal } = useContext(CheckoutContext);
+    const [ exists, setExists ] = useState(false);
 
     useEffect(() => {
         getVegetarianRecords();
@@ -30,7 +32,7 @@ const Vegetarians = () => {
     }
 
     return(
-        <div className='container'>
+        <div className='container' style={{marginTop:-25}}>
         <h1 className='h1 text-center my-4'>HEALTHY HABBITS</h1>
         {loading && 
             <div className='text-center mt-5'>
@@ -39,12 +41,12 @@ const Vegetarians = () => {
             </div>}
         <div className='container d-flex'>
             {vegetables.map((vegetable) =>
-                <div className='row w-100'>
-                <div className='card col-4 shadow-lg px-0' key={Math.random * 10000} style={{width: "25%"}}>
-                    <img className='card-img-top image-fluid h-50 w-100' src={vegetable.imageUrl} />
-                    <div className='card-body h-50 pb-0' >
+                <div className='' style={{display: 'flex', flexDirection: 'row', marginRight:8, boxShadow: "5px 5px 5px black"}}>
+                <div className='card shadow-lg px-0' key={Math.random * 10000} style={{flex: 1}}>
+                    <img className='card-img-top image-fluid h-100 w-100' src={vegetable.imageUrl} />
+                    <div className='card-body' style={{height:"100%"}}>
                         <h5 className='h5 card-text text-center'>{vegetable.itemName}</h5>
-                        <p className='card-text text-center'>${vegetable.costToMarket}.00</p>
+                        <p className='card-text text-center'>${vegetable.costToMarket}</p>
                         <div className='card-link d-flex justify-content-between'>
                             <button className='btn btn-dark btn-sm  pb-0 mb-0'
                             onClick={() => {
@@ -65,7 +67,7 @@ const Vegetarians = () => {
                                             quantity: 1,
                                             cost: parseInt(vegetable.costToMarket),
                                             image: vegetable.imageUrl,
-                                            stripeApiID: sweet.stripeApiID
+                                            stripeApiID: vegetable.stripeApiID
                                         }]); 
                                         }
                                         else {
@@ -104,7 +106,7 @@ const Vegetarians = () => {
                                                     quantity: 1,
                                                     cost: parseInt(vegetable.costToMarket),
                                                     image: vegetable.imageUrl,
-                                                    stripeApiID: sweet.stripeApiID
+                                                    stripeApiID: vegetable.stripeApiID
                                                 }]);
                                             }
                                         })
@@ -114,7 +116,7 @@ const Vegetarians = () => {
                                                     quantity: 1,
                                                     cost: parseInt(vegetable.costToMarket),
                                                     image: vegetable.imageUrl,
-                                                    stripeApiID: sweet.stripeApiID
+                                                    stripeApiID: vegetable.stripeApiID
                                                 }]); 
                                                 
                                     }

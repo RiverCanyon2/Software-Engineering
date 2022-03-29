@@ -1,10 +1,15 @@
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css'
+import Script from 'next/script';
 
-import { useEffect, useState } from 'react';
+
+import { useEffect, useState, useContext  } from 'react';
+import { CheckoutContext } from './_app';
 
 
 const Carnivores = () => {
+    const { itemsInCart, setItemsInCart, total, setTotal } = useContext(CheckoutContext);
+    const [ exists, setExists ] = useState(false);
 
     useEffect(() => {
         getCarnivoreRecords();
@@ -25,8 +30,9 @@ const Carnivores = () => {
         setLoading(false);
     }
 
+
     return(
-        <div className='container'>
+        <div className='container' style={{marginTop:-25}}>
         <h1 className='h1 text-center my-4'>MEAT LOVERS</h1>
         {loading && 
             <div className='text-center mt-5'>
@@ -35,12 +41,12 @@ const Carnivores = () => {
             </div>}
         <div className='container d-flex'>
             {meats.map((meat) =>
-                <div className='row w-100'>
-                <div className='card col-4 shadow-lg px-0' key={Math.random * 10000}>
-                    <img className='card-img-top image-fluid h-50 w-100' src={meat.imageUrl} />
-                    <div className='card-body h-50 pb-0' >
+                <div className='' style={{display: 'flex', flexDirection: 'row', marginRight:8, boxShadow: "5px 5px 5px black"}}>
+                <div className='card shadow-lg px-0' key={Math.random * 10000} style={{flex: 1}}>
+                    <img className='card-img-top image-fluid h-100 w-100' src={meat.imageUrl} />
+                    <div className='card-body' style={{height:"100%",}}>
                         <h5 className='h5 card-text text-center'>{meat.itemName}</h5>
-                        <p className='card-text text-center'>${meat.costToMarket}.00</p>
+                        <p className='card-text text-center'>${meat.costToMarket}</p>
                         <div className='card-link d-flex justify-content-between'>
                             <button className='btn btn-dark btn-sm  pb-0 mb-0'
                             onClick={() => {
@@ -62,7 +68,7 @@ const Carnivores = () => {
                                             quantity: 1,
                                             cost: parseInt(meat.costToMarket),
                                             image: meat.imageUrl,
-                                            stripeApiID: sweet.stripeApiID
+                                            stripeApiID: meat.stripeApiID
                                         }]); 
                                         console.log(itemsInCart)
                                         }
@@ -102,7 +108,7 @@ const Carnivores = () => {
                                                     quantity: 1,
                                                     cost: parseInt(meat.costToMarket),
                                                     image: meat.imageUrl,
-                                                    stripeApiID: sweet.stripeApiID
+                                                    stripeApiID: meat.stripeApiID
                                                 }]);
                                             }
                                         })
@@ -112,7 +118,7 @@ const Carnivores = () => {
                                                     quantity: 1,
                                                     cost: parseInt(meat.costToMarket),
                                                     image: meat.imageUrl,
-                                                    stripeApiID: sweet.stripeApiID
+                                                    stripeApiID: meat.stripeApiID
                                                 }]); 
                                                 
                                     }

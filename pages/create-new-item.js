@@ -25,7 +25,6 @@ const CreateNewItem = () => {
   })
   const [costOfGoods, setCostOfGoods] = useState(0);
   const [costToMarket, setCostToMarket] = useState(0);
-  const [stripeApiID, setStripeApiID] = useState('');
 
   const [createNewItem, setCreateNewItem] = useState(false)
 
@@ -53,7 +52,6 @@ const CreateNewItem = () => {
       },
       costOfGoods,
       costToMarket,
-      stripeApiID
     });
 
     
@@ -77,7 +75,6 @@ const CreateNewItem = () => {
     });
     setCostOfGoods(0);
     setCostToMarket(0);
-    setStripeApiID('');
   }
 
   const itemNameHandler = event => {
@@ -98,9 +95,7 @@ const CreateNewItem = () => {
   const costToMarketHandler = event => {
     setCostToMarket(event.target.value);
   }
-  const stripeIdHandler = event => {
-    setStripeApiID(event.target.value);
-  }
+
 
   const createItemHandler = () => {
     setCreateNewItem(true);
@@ -126,16 +121,6 @@ const CreateNewItem = () => {
           className='shadow form-control' 
           onChange={itemNameHandler}
           value={itemName}
-          />
-      </div>
-      <div className='mx-auto my-2 w-75'>
-        <label>Stripe API ID</label>
-        <input 
-          className='shadow form-control' 
-          onChange={stripeIdHandler}
-          value={stripeApiID}
-          required
-          placeholder='*Required'
           />
       </div>
       <div className='mx-auto my-2 w-75'>

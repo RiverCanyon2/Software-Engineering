@@ -19,7 +19,7 @@ export default async function handler(req,res) {
                 
         const stripeData = {
             image: data.imageUrl,
-            price: data.costToMarket * 100,
+            price: Math.ceil(data.costToMarket * 100),
             currency: 'usd',
             inventory: {type: 'finite', quantity: 1},
             product: skuProd.id,
