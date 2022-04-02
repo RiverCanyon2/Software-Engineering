@@ -39,9 +39,9 @@ const Vegetarians = () => {
             <div class="spinner-border mx-auto" style={{width: '5rem', height: '5rem'}} role="status">
             </div>
             </div>}
-        <div className='container d-flex'>
+        <div className='row w-100 justify-content-around'>
             {vegetables.map((vegetable) =>
-                <div className='' style={{display: 'flex', flexDirection: 'row', marginRight:8, boxShadow: "5px 5px 5px black"}}>
+                <div className='col-md-2 my-4 px-0' style={{display: 'flex', flexDirection: 'row', marginRight:8, boxShadow: "5px 5px 5px black"}}>
                 <div className='card shadow-lg px-0' key={Math.random * 10000} style={{flex: 1}}>
                     <img className='card-img-top image-fluid h-100 w-100' src={vegetable.imageUrl} />
                     <div className='card-body' style={{height:"100%"}}>
