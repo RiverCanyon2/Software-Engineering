@@ -12,8 +12,8 @@ const Navbar = () => {
   }
 
     return(
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
-        <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{position:'sticky', top:0, zIndex:1}}>
+        <div className="container-fluid" >
           <a className="navbar-brand" href="#">Wesley's Farm</a>
           <div className="container-fluid" id="navbarSupportedContent">
             <ul className="navbar-nav center justify-content-between " >
