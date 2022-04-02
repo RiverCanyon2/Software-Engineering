@@ -1,5 +1,6 @@
 import './styles/main.css'
 import Navbar from './../UI/Navbar/Navbar'
+import Footer from './../UI/Navbar/Footer'
 import { createContext, useState, useMemo } from 'react';
 
 export const CheckoutContext = createContext({
@@ -31,6 +32,7 @@ function MyApp({ Component, pageProps }) {
     <div className="backgroundColor">
     <Component {...pageProps} />
     </div>
+    <Footer />
   </CheckoutContext.Provider>
    )
 }
