@@ -85,6 +85,7 @@ export default function Home() {
 
 
   return (
+    <div style={{backgroundImage: 'url(https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)', backgroundSize: 'cover', width: '100vw', height: '100vh'}}>
     <div className='newItemBackground w-100'>
   <div className='text-center py-3'>
     {!loggedIn && <button type="button" className="btn btn-dark btn-lg my-4 mx-5" onClick={signInHandler}>SIGN IN</button>}
@@ -215,6 +216,7 @@ export default function Home() {
       
     </div>
   }
+    </div>
     </div>
   )
 }

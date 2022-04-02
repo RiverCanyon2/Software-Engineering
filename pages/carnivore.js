@@ -39,7 +39,7 @@ const Carnivores = () => {
             <div class="spinner-border mx-auto" style={{width: '5rem', height: '5rem'}} role="status">
             </div>
             </div>}
-        <div className='crow w-100 justify-content-around'>
+        <div className='row w-100 justify-content-around'>
             {meats.map((meat) =>
                 <div className='col-md-2 my-4 px-0' style={{display: 'flex', flexDirection: 'row', marginRight:8, boxShadow: "5px 5px 5px black"}}>
                 <div className='card shadow-lg px-0' key={Math.random * 10000} style={{flex: 1}}>
