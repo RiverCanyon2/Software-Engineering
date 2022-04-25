@@ -25,8 +25,10 @@ const Checkout = () => {
 
         const line_items = itemsInCart.map((item) => {
                 return ({
-                    price: item.stripeApiID,
-                    quantity: item.quantity
+                    amount: item.cost * 100,
+                    quantity: item.quantity,
+                    currency: 'usd',
+                    name: item.name
                 })
             })
         await loadStripe(
